@@ -9,7 +9,7 @@
 (varfn decode [input &opt indicator])
 
 
-(defn- read-byte
+(defn read-byte
   ```
   Read a single byte from `stream`
   ```
@@ -18,7 +18,7 @@
   (-> (:read stream 1 single) (get 0)))
 
 
-(defn- read-bytes
+(defn read-bytes
   ```
   Read `n` bytes from `stream`
   ```
@@ -27,7 +27,7 @@
   (-> (:read stream n multi) (string)))
 
 
-(defn- to-digit
+(defn to-digit
   ```
   Convert `b`, the integer value of a UTF-8 character, into a digit from 0-9
   ```
@@ -35,7 +35,7 @@
   (- b 48))
 
 
-(defn- is-minus?
+(defn is-minus?
   ```
   Check whether `b`, the integer value of a UTF-8 character, represents the
   minus character
@@ -44,7 +44,7 @@
   (= b 45))
 
 
-(defn- is-num?
+(defn is-num?
   ```
   Check whether `b`, the integer value of a UTF-8 character, represents a
   digit from 0-9
@@ -53,7 +53,7 @@
   (and (>= b 48) (<= b 57)))
 
 
-(defn- is-char?
+(defn is-char?
   ```
   Check whether `b`, the integer value of a UTF-8 character, is equal to a
   character `c`
@@ -62,7 +62,7 @@
   (-> (string/bytes c) (first) (= b)))
 
 
-(defn- decode-str
+(defn decode-str
   ```
   Decode a string from a bytestream `stream` of length `len`
   ```
@@ -70,7 +70,7 @@
   (string (read-bytes stream len)))
 
 
-(defn- decode-nums
+(defn decode-nums
   ```
   Decode a number from a bytestream `stream` until an `ending`
 
@@ -90,7 +90,7 @@
       (error "invalid bencoding: number"))))
 
 
-(defn- decode-int
+(defn decode-int
   ```
   Decode an integer from a bytestream `stream`
   ```
@@ -101,7 +101,7 @@
       (is-num? byte) (decode-nums stream "e" (to-digit byte)))))
 
 
-(defn- decode-list
+(defn decode-list
   ```
   Decode a list from a bytestream `stream`
 
@@ -116,7 +116,7 @@
       (decode-list stream (tuple (splice items) (decode stream byte))))))
 
 
-(defn- decode-key
+(defn decode-key
   ```
   Decode a dictionary key from a bytestream `stream` with initial `byte`
 
@@ -129,7 +129,7 @@
     (error "invalid bencoding: dictionary key")))
 
 
-(defn- decode-dict
+(defn decode-dict
   ```
   Decode a dictionary from a bytestream `stream`
 
