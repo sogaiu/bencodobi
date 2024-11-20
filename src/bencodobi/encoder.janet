@@ -5,7 +5,7 @@
 (varfn encode [stream val])
 
 
-(defn- write-string
+(defn write-string
   ```
   Write `str` to `stream`
   ```
@@ -13,7 +13,7 @@
   (:write stream str))
 
 
-(defn- is-num?
+(defn is-num?
   ```
   Check whether the value is an integer
 
@@ -24,7 +24,7 @@
   (int? val))
 
 
-(defn- is-str?
+(defn is-str?
   ```
   Check whether `val` is a string
 
@@ -40,7 +40,7 @@
     false))
 
 
-(defn- is-list?
+(defn is-list?
   ```
   Check whether `val` is an indexed data structure
   ```
@@ -48,7 +48,7 @@
   (indexed? val))
 
 
-(defn- is-dict?
+(defn is-dict?
   ```
   Check whether `val` is a dictionary data structure
 
@@ -60,7 +60,7 @@
        (all is-str? (keys val))))
 
 
-(defn- encode-num
+(defn encode-num
   ```
   Encode `num` and write it to `stream`
   ```
@@ -69,7 +69,7 @@
        (write-string stream)))
 
 
-(defn- encode-str
+(defn encode-str
   ```
   Encode `str` and write it to `stream`
   ```
@@ -79,7 +79,7 @@
        (write-string stream)))
 
 
-(defn- encode-list
+(defn encode-list
   ```
   Encode `list` and write it to `stream`
   ```
@@ -90,7 +90,7 @@
   (write-string stream "e"))
 
 
-(defn- encode-dict
+(defn encode-dict
   ```
   Encode `dict` and write it to `stream`
   ```
